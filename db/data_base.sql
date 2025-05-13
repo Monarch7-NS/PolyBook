@@ -5,7 +5,7 @@ USE polybook;
 
 -- TABLE UTILISATEUR
 CREATE TABLE user (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     created_at DATE,
     username TEXT,
     email TEXT,
