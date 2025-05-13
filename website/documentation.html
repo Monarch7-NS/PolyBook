@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet PolyBook - Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2, h3, h4 {
+            color: #4285f4;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #4285f4;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .toc {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .toc li {
+            margin-bottom: 5px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #4285f4;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .note {
+            background-color: #e8f4fd;
+            border-left: 4px solid #4285f4;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Documentation du Projet PolyBook</h1>
+    
+    <div class="toc">
+        <h2>Table des matières</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#structure">2. Structure du projet</a></li>
+            <li><a href="#installation">3. Installation et configuration</a></li>
+            <li><a href="#fonctionnalites">4. Fonctionnalités du client</a>
+                <ul>
+                    <li><a href="#auth">4.1. Authentification</a></li>
+                    <li><a href="#catalogue">4.2. Catalogue de livres</a></li>
+                    <li><a href="#livres">4.3. Détails des livres et avis</a></li>
+                    <li><a href="#listes">4.4. Listes de lecture</a></li>
+                    <li><a href="#cercles">4.5. Cercles d'amis</a></li>
+                    <li><a href="#groupes">4.6. Groupes de lecture</a></li>
+                    <li><a href="#profil">4.7. Profil utilisateur</a></li>
+                </ul>
+            </li>
+            <li><a href="#bdd">5. Structure de la base de données</a></li>
+            <li><a href="#admin">6. Module administrateur (partie non implémentée)</a></li>
+            <li><a href="#extensions">7. Extensions possibles</a></li>
+        </ul>
+    </div>
+    
+    <h2 id="introduction">1. Introduction</h2>
+    <p>PolyBook est une application web de partage de livres inspirée de Goodreads, développée dans le cadre du projet PROJ631. L'application permet aux utilisateurs de consulter un catalogue de livres, de partager des avis, de créer des listes de lecture personnalisées, et de participer à des cercles d'amis et des groupes de lecture.</p>
+    
+    <p>Cette documentation couvre la partie client de l'application, qui a été implémentée pour répondre aux exigences du projet. La partie administrative n'a pas été développée mais est décrite brièvement dans cette documentation.</p>
+    
+    <div class="note">
+        <p><strong>Note:</strong> Cette application est un prototype développé à des fins éducatives. Dans un environnement de production, des mesures de sécurité supplémentaires seraient nécessaires.</p>
+    </div>
+    
+    <h2 id="structure">2. Structure du projet</h2>
+    <p>Le projet est organisé selon une architecture simple utilisant PHP, MySQL, HTML, CSS et JavaScript. Voici les principaux fichiers de l'application client :</p>
+    
+    <h3>Fichiers principaux</h3>
+    <ul>
+        <li><code>connexion.php</code> : Gestion de la connexion à la base de données et fonctions utilitaires</li>
+        <li><code>index.php</code> : Page d'accueil</li>
+        <li><code>header.php</code> : En-tête commun à toutes les pages</li>
+        <li><code>footer.php</code> : Pied de page commun à toutes les pages</li>
+        <li><code>styles.css</code> : Feuille de styles CSS</li>
+        <li><code>scripts.js</code> : Scripts JavaScript</li>
+    </ul>
+    
+    <h3>Module d'authentification</h3>
+    <ul>
+        <li><code>connexion_form.php</code> : Formulaire de connexion</li>
+        <li><code>inscription_form.php</code> : Formulaire d'inscription</li>
+        <li><code>deconnexion.php</code> : Script de déconnexion</li>
+    </ul>
+    
+    <h3>Catalogue et livres</h3>
+    <ul>
+        <li><code>catalogue.php</code> : Catalogue de livres avec filtres</li>
+        <li><code>livre.php</code> : Page détaillée d'un livre</li>
+        <li><code>ajouter_commentaire.php</code> : Traitement de l'ajout d'un commentaire</li>
+        <li><code>commentaires.php</code> : Page affichant tous les commentaires d'un avis</li>
+        <li><code>supprimer_avis.php</code> : Suppression d'un avis</li>
+        <li><code>supprimer_commentaire.php</code> : Suppression d'un commentaire</li>
+    </ul>
+    
+    <h3>Listes de lecture</h3>
+    <ul>
+        <li><code>listes.php</code> : Gestion des listes de lecture</li>
+        <li><code>liste.php</code> : Page détaillée d'une liste</li>
+        <li><code>modifier_liste.php</code> : Modification d'une liste</li>
+        <li><code>supprimer_liste.php</code> : Suppression d'une liste</li>
+    </ul>
+    
+    <h3>Cercles d'amis</h3>
+    <ul>
+        <li><code>cercles.php</code> : Gestion des cercles d'amis</li>
+        <li><code>cercle.php</code> : Page détaillée d'un cercle</li>
+        <li><code>quitter_cercle.php</code> : Script pour quitter un cercle</li>
+        <li><code>repondre_invitation.php</code> : Réponse à une invitation à un cercle</li>
+    </ul>
+    
+    <h3>Groupes de lecture</h3>
+    <ul>
+        <li><code>groupes_lecture.php</code> : Gestion des groupes de lecture</li>
+        <li><code>groupe_lecture.php</code> : Page détaillée d'un groupe</li>
+        <li><code>rejoindre_groupe.php</code> : Script pour rejoindre un groupe</li>
+        <li><code>quitter_groupe.php</code> : Script pour quitter un groupe</li>
+    </ul>
+    
+    <h3>Profil utilisateur</h3>
+    <ul>
+        <li><code>profil.php</code> : Page de profil utilisateur</li>
+        <li><code>favoris.php</code> : Liste des livres favoris</li>
+        <li><code>avis.php</code> : Liste des avis d'un utilisateur</li>
+    </ul>
+    
+    <h2 id="installation">3. Installation et configuration</h2>
+    <h3>Prérequis</h3>
+    <ul>
+        <li>PHP 7.4 ou supérieur</li>
+        <li>MySQL 5.7 ou supérieur</li>
+        <li>Serveur web (Apache, Nginx, etc.)</li>
+        <li>XAMPP/WAMP/MAMP (recommandé pour le développement local)</li>
+    </ul>
+    
+    <h3>Étapes d'installation</h3>
+    <ol>
+        <li>Clonez ou téléchargez les fichiers du projet dans le répertoire de votre serveur web</li>
+        <li>Importez le fichier SQL <code>data_base.sql</code> dans votre base de données MySQL</li>
+        <li>Modifiez les paramètres de connexion à la base de données dans le fichier <code>connexion.php</code> :</li>
+    </ol>
+    
+    <pre>
+$serveur = "localhost";
+$utilisateur = "root";  // Remplacez par votre nom d'utilisateur MySQL
+$motdepasse = "";       // Remplacez par votre mot de passe MySQL
+$basededonnees = "polybook";
+</pre>
+    
+    <h3>Configuration supplémentaire</h3>
+    <p>Assurez-vous que le serveur web a les permissions nécessaires pour lire et écrire dans le répertoire du projet. Dans un environnement de production, vous devriez mettre en place des mesures de sécurité supplémentaires comme :</p>
+    
+    <ul>
+        <li>Utiliser HTTPS</li>
+        <li>Configurer correctement les en-têtes de sécurité</li>
+        <li>Utiliser des méthodes de hachage sécurisées pour les mots de passe (le projet utilise une simplification)</li>
+        <li>Mettre en place une protection contre les attaques CSRF</li>
+    </ul>
+    
+    <div class="warning">
+        <p><strong>Attention :</strong> Dans cette implémentation, les mots de passe sont stockés de manière simplifiée (avec un préfixe "hashed_"). Dans un environnement de production, utilisez <code>password_hash()</code> et <code>password_verify()</code> pour sécuriser les mots de passe.</p>
+    </div>
+    
+    <h2 id="fonctionnalites">4. Fonctionnalités du client</h2>
+    
+    <h3 id="auth">4.1. Authentification</h3>
+    <p>Le système d'authentification permet aux utilisateurs de :</p>
+    <ul>
+        <li>S'inscrire en fournissant un nom d'utilisateur, une adresse e-mail et un mot de passe</li>
+        <li>Se connecter avec leur nom d'utilisateur et mot de passe</li>
+        <li>Se déconnecter</li>
+    </ul>
+    
+    <p>Les sessions PHP sont utilisées pour maintenir l'état de connexion des utilisateurs. Lorsqu'un utilisateur se connecte, son ID, son nom d'utilisateur et son rôle sont stockés en session.</p>
+    
+    <h3 id="catalogue">4.2. Catalogue de livres</h3>
+    <p>Le catalogue permet aux utilisateurs de :</p>
+    <ul>
+        <li>Parcourir tous les livres approuvés</li>
+        <li>Filtrer les livres par titre, auteur, genre, langue</li>
+        <li>Trier les livres par différents critères (titre, auteur, année, note)</li>
+        <li>Paginer les résultats pour une meilleure navigation</li>
+    </ul>
+    
+    <p>La page d'accueil présente également une sélection de livres à découvrir, basée sur les notes et le nombre d'avis.</p>
+    
+    <h3 id="livres">4.3. Détails des livres et avis</h3>
+    <p>La page détaillée d'un livre affiche :</p>
+    <ul>
+        <li>Les informations du livre (titre, auteur, année, ISBN, description)</li>
+        <li>La couverture du livre (via l'API Open Library)</li>
+        <li>La note moyenne et le nombre d'avis</li>
+        <li>Les avis des utilisateurs avec leurs commentaires</li>
+    </ul>
+    
+    <p>Les utilisateurs connectés peuvent :</p>
+    <ul>
+        <li>Ajouter le livre à leurs favoris</li>
+        <li>Ajouter le livre à une liste de lecture</li>
+        <li>Publier un avis avec une note, un contenu et des tags</li>
+        <li>Commenter les avis d'autres utilisateurs</li>
+        <li>Marquer un avis comme contenant des spoilers</li>
+    </ul>
+    
+    <h3 id="listes">4.4. Listes de lecture</h3>
+    <p>Les listes de lecture permettent aux utilisateurs de :</p>
+    <ul>
+        <li>Créer des listes personnalisées (publiques ou privées)</li>
+        <li>Ajouter/retirer des livres de leurs listes</li>
+        <li>Modifier ou supprimer leurs listes</li>
+        <li>Consulter les listes publiques d'autres utilisateurs</li>
+    </ul>
+    
+    <h3 id="cercles">4.5. Cercles d'amis</h3>
+    <p>Les cercles d'amis permettent aux utilisateurs de :</p>
+    <ul>
+        <li>Créer des cercles d'amis thématiques</li>
+        <li>Inviter des amis à rejoindre leurs cercles</li>
+        <li>Partager leurs lectures au sein d'un cercle</li>
+        <li>Voir les livres populaires dans leur cercle</li>
+        <li>Consulter l'activité récente des membres (avis, commentaires)</li>
+    </ul>
+    
+    <p>Pour devenir amis, les utilisateurs doivent envoyer et accepter des demandes d'amitié.</p>
+    
+    <h3 id="groupes">4.6. Groupes de lecture</h3>
+    <p>Les groupes de lecture permettent aux utilisateurs de :</p>
+    <ul>
+        <li>Créer des groupes de lecture thématiques</li>
+        <li>Rejoindre des groupes existants</li>
+        <li>Programmer des lectures avec des dates de début et de fin</li>
+        <li>Participer à des discussions sur les livres en cours de lecture</li>
+        <li>Consulter l'historique des lectures passées</li>
+    </ul>
+    
+    <h3 id="profil">4.7. Profil utilisateur</h3>
+    <p>Le profil utilisateur affiche :</p>
+    <ul>
+        <li>Les informations personnelles (nom d'utilisateur, statut)</li>
+        <li>Une biographie personnalisable</li>
+        <li>Les genres préférés</li>
+        <li>Les livres favoris</li>
+        <li>Les avis récents</li>
+        <li>Les listes de lecture</li>
+        <li>Les statistiques d'activité</li>
+    </ul>
+    
+    <p>Les utilisateurs peuvent consulter les profils publics d'autres utilisateurs, avec certaines restrictions pour les contenus privés.</p>
+    
+    <h2 id="bdd">5. Structure de la base de données</h2>
+    <p>La base de données PolyBook comprend plusieurs tables relationnelles pour stocker les informations sur les utilisateurs, les livres, les avis, les commentaires, les cercles d'amis et les groupes de lecture.</p>
+    
+    <h3>Tables principales</h3>
+    <ul>
+        <li><strong>user</strong> : Informations sur les utilisateurs</li>
+        <li><strong>grade</strong> : Statuts des utilisateurs (étudiant, professeur)</li>
+        <li><strong>resume</strong> : Biographies des utilisateurs</li>
+        <li><strong>book</strong> : Informations sur les livres</li>
+        <li><strong>review</strong> : Avis des utilisateurs sur les livres</li>
+        <li><strong>comment</strong> : Commentaires sur les avis</li>
+        <li><strong>genre</strong> : Genres littéraires</li>
+    </ul>
+    
+    <h3>Tables de relations</h3>
+    <ul>
+        <li><strong>user_genre</strong> : Genres préférés des utilisateurs</li>
+        <li><strong>friendship</strong> : Relations d'amitié entre utilisateurs</li>
+        <li><strong>favorite_book</strong> : Livres favoris des utilisateurs</li>
+        <li><strong>reading_list</strong> : Listes de lecture</li>
+        <li><strong>reading_list_book</strong> : Livres dans les listes de lecture</li>
+        <li><strong>circle</strong> : Cercles d'amis</li>
+        <li><strong>circle_member</strong> : Membres des cercles</li>
+        <li><strong>reading_group</strong> : Groupes de lecture</li>
+        <li><strong>reading_group_member</strong> : Membres des groupes</li>
+        <li><strong>reading_group_book</strong> : Livres dans les groupes de lecture</li>
+    </ul>
+    
+    <h3>Diagramme des relations</h3>
+    <p>Le diagramme ci-dessous illustre les relations entre les principales tables :</p>
+    
+    <pre>
+    user ───────┬──────→ resume
+               │
+               ├──────→ favorite_book ←──────┐
+               │                             │
+               ├──────→ review ←──────┐      │
+               │          │           │      │
+               │          ↓           │      │
+               ├──────→ comment       │      │
+               │                      │      │
+               ├──────→ user_genre ←──┐     │
+               │                      │     │
+    grade ─────┘                      │     │
+                                      ↓     ↓
+                                    genre   book
+                                      
+    user ───────┬──────→ friendship
+               │
+               ├──────→ reading_list ────→ reading_list_book ←─── book
+               │
+               ├──────→ circle_member ←─── circle
+               │
+               └──────→ reading_group_member ←─── reading_group ────→ reading_group_book ←─── book
+    </pre>
+    
+    <h2 id="admin">6. Module administrateur (partie non implémentée)</h2>
+    <p>La partie administrative de l'application n'a pas été implémentée mais devrait inclure les fonctionnalités suivantes :</p>
+    
+    <ul>
+        <li>Gestion des utilisateurs (création, modification, suppression)</li>
+        <li>Gestion des livres (ajout, modification, suppression, approbation)</li>
+        <li>Gestion des genres</li>
+        <li>Modération des avis et commentaires (signalements)</li>
+        <li>Statistiques d'utilisation de la plateforme</li>
+    </ul>
+    
+    <h2 id="extensions">7. Extensions possibles</h2>
+    <p>Voici quelques extensions qui pourraient améliorer l'application :</p>
+    
+    <ul>
+        <li><strong>Import automatique de livres</strong> : Intégration avec des API comme Google Books ou Open Library pour importer automatiquement des informations sur les livres</li>
+        <li><strong>Système de recommandation</strong> : Suggestion de livres basée sur les préférences des utilisateurs et leur historique de lecture</li>
+        <li><strong>Notifications</strong> : Alertes pour les nouveaux commentaires, invitations, demandes d'amitié, etc.</li>
+        <li><strong>Recherche avancée</strong> : Amélioration du système de recherche avec des filtres plus précis</li>
+        <li><strong>Interface mobile</strong> : Optimisation pour les appareils mobiles ou développement d'une application native</li>
+        <li><strong>Intégration des réseaux sociaux</strong> : Partage d'avis sur les réseaux sociaux, connexion via OAuth</li>
+        <li><strong>Système de défis de lecture</strong> : Challenges personnels ou entre amis (nombre de livres lus, genres spécifiques, etc.)</li>
+        <li><strong>API publique</strong> : Permettre à des développeurs tiers d'accéder aux données de l'application</li>
+    </ul>
+    
+    <div class="note">
+        <p><strong>Note finale :</strong> Ce projet a été développé dans le cadre du cours PROJ631. Il s'agit d'un prototype fonctionnel qui répond aux exigences minimales du projet, mais qui pourrait être amélioré et étendu pour un usage en production.</p>
+    </div>
+</body>
+</html>
