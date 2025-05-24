@@ -171,6 +171,14 @@ CREATE TABLE reading_group_book (
     end_date DATE
 );
 
+CREATE TABLE book_genre (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT,
+    genre_id INT,
+    FOREIGN KEY (book_id) REFERENCES book(id),
+    FOREIGN KEY (genre_id) REFERENCES genre(id)
+);
+
 -- GRADES
 INSERT INTO grade VALUES (1, '2024-01-01', 'Étudiant');
 INSERT INTO grade VALUES (2, '2024-01-01', 'Professeur');
@@ -249,3 +257,60 @@ INSERT INTO reading_group_book VALUES
 -- REPORT
 INSERT INTO report VALUES 
 (1, '2025-04-03', 2, 1, NULL, NULL, 'Comportement inapproprié', 'en cours');
+
+INSERT INTO book_genre (book_id, genre_id) 
+VALUES (1, 1);
+
+INSERT INTO book_genre (book_id, genre_id) 
+VALUES (2, 2);
+
+INSERT INTO genre (id, name) VALUES
+(1, 'Science-fiction'),
+(2, 'Classique'),
+(3, 'Fantastique'),
+(4, 'Mystère'),
+(5, 'Romance'),
+(6, 'Thriller'),
+(7, 'Horreur'),
+(8, 'Fiction historique'),
+(9, 'Non-fiction'),
+(10, 'Biographie'),
+(11, 'Développement personnel'),
+(12, 'Littérature jeunesse'),
+(13, 'Dystopie'),
+(14, 'Aventure'),
+(15, 'Poésie'),
+(16, 'Roman graphique'),
+(17, 'Livre de cuisine'),
+(18, 'Science'),
+(19, 'Philosophie'),
+(20, 'Religion'),
+(21, 'Voyage'),
+(22, 'Humour'),
+(23, 'Essai'),
+(24, 'Drame'),
+(25, 'Policier'),
+(26, 'Technologie'),
+(27, 'Économie'),
+(28, 'Art'),
+(29, 'Autobiographie'),
+(30, 'Santé et bien-être'),
+(31, 'Spiritualité'),
+(32, 'Écologie'),
+(33, 'Psychologie'),
+(34, 'Sociologie'),
+(35, 'Science politique'),
+(36, 'Anthropologie'),
+(37, 'Management'),
+(38, 'Développement web'),
+(39, 'Informatique'),
+(40, 'Mathématiques'),
+(41, 'Physique'),
+(42, 'Chimie'),
+(43, 'Astronomie'),
+(44, 'Cuisine du monde'),
+(45, 'Sport'),
+(46, 'Mode'),
+(47, 'Photographie'),
+(48, 'Cinéma'),
+(49, 'Musique');
