@@ -130,19 +130,22 @@ CREATE TABLE report (
 
 -- TABLE READING LIST
 CREATE TABLE reading_list (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     created_at DATE,
     name TEXT,
     user_id INT,
-    is_public BOOLEAN DEFAULT FALSE
+    is_public BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 -- TABLE READING LIST BOOK
 CREATE TABLE reading_list_book (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     reading_list_id INT,
     book_id INT,
-    added_at DATE
+    added_at DATE,
+    FOREIGN KEY (reading_list_id) REFERENCES reading_list(id),
+    FOREIGN KEY (book_id) REFERENCES book(id)
 );
 
 -- TABLE READING GROUP

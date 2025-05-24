@@ -14,7 +14,8 @@
                     <li><a href="cercles.php">Cercles d'amis</a></li>
                     <li><a href="groupes_lecture.php">Groupes de lecture</a></li>
                     <li><a href="listes.php">Mes listes</a></li>
-                <?php endif; ?>
+                    <li><a href="recherche_utilisateurs.php">Rechercher des amis</a></li>
+                    <?php endif; ?>
             </ul>
         </nav>
         

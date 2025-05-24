@@ -18,7 +18,7 @@
     }
     
     // Vérifier si l'ID du cercle est fourni
-    if (!isset($_GET['id']) || empty($_GET['id'])) {
+    if (!isset($_GET['id']) || $_GET['id'] === '') {
         redirect('cercles.php', 'Cercle non spécifié.', 'error');
     }
     
